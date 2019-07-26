@@ -1,4 +1,4 @@
-package com.example.hector;
+package com.example.hector.indicator;
 
 import java.util.List;
 import java.util.Optional;

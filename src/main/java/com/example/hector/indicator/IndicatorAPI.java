@@ -1,4 +1,4 @@
-package com.example.hector;
+package com.example.hector.indicator;
 
 import java.util.List;
 import java.util.Optional;
@@ -46,9 +46,8 @@ public class IndicatorAPI {
 	        }
 
 	        return ResponseEntity.ok(indicator.get());
-
+	        
 	    }
-	    
 	    
 	    @PutMapping("/{id}")
 	    public ResponseEntity<HealthIndicator> update(@PathVariable Long id, @Valid @RequestBody HealthIndicator healthIndicator) {

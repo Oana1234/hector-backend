@@ -1,7 +1,9 @@
-package com.example.hector;
+package com.example.hector.indicator;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+@Controller
 public class IndicatorController {
 	
 	@GetMapping("/")
