@@ -13,15 +13,15 @@ public class IndicatorService {
 	
 	private final IndicatorRepository indicatorRepository;
 	
-	  public List<HealthIndicator> findAll() {
+	  public List<IndicatorType> findAll() {
 	        return indicatorRepository.findAll();
 	    }
 
-	    public Optional<HealthIndicator> findById(Long id) {
+	    public Optional<IndicatorType> findById(Long id) {
 	        return indicatorRepository.findById(id);
 	    }
 
-	    public HealthIndicator save(HealthIndicator indicator) {
+	    public IndicatorType save(IndicatorType indicator) {
 	        return indicatorRepository.save(indicator);
 	    }
 

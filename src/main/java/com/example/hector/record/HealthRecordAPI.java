@@ -1,4 +1,4 @@
-package com.example.hector.indicator;
+package com.example.hector.record;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,54 +19,56 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@RequestMapping("/api/hector/indicators")
+@RequestMapping("/api/hector/records")
 @Slf4j
 @RequiredArgsConstructor
-public class IndicatorAPI{
+public class HealthRecordAPI {
 	
-	private final IndicatorService indicatorService;
+	private final HealthRecordService healthRecordService;
 	
 	    @GetMapping
-	    public ResponseEntity<List<IndicatorType>>getAll() {
-	        return ResponseEntity.ok(indicatorService.findAll());
+	    public ResponseEntity<List<HealthRecord>>getAll() {
+	        return ResponseEntity.ok(healthRecordService.findAll());
 	    }
 
 	    @PostMapping
-	    public ResponseEntity<IndicatorType> create(@Valid @RequestBody IndicatorType indicator){
-	        return ResponseEntity.ok(indicatorService.save(indicator));
+	    public ResponseEntity<HealthRecord> create(@Valid @RequestBody HealthRecord healthRecord){
+	        return ResponseEntity.ok(healthRecordService.save(healthRecord));
 	    }
 
 	    @GetMapping("/{id}")
-	    public ResponseEntity<IndicatorType> findById(@PathVariable Long id) {
+	    public ResponseEntity<HealthRecord> findById(@PathVariable Long id) {
 	      
-	    	Optional<IndicatorType> indicator = indicatorService.findById(id);
-	        if (!indicator.isPresent()) {
+	    	Optional<HealthRecord> record = healthRecordService.findById(id);
+	        if (!record.isPresent()) {
 	            log.error("Id " + id + " is not existed");
 	            ResponseEntity.badRequest().build();
 	        }
 
-	        return ResponseEntity.ok(indicator.get());
+	        return ResponseEntity.ok(record.get());
 	        
 	    }
 	    
+	    @GetMapping("/id")
+	    
 	    @PutMapping("/{id}")
-	    public ResponseEntity<IndicatorType> update(@PathVariable Long id, @Valid @RequestBody IndicatorType indicator) {
-	        if (!indicatorService.findById(id).isPresent()) {
+	    public ResponseEntity<HealthRecord> update(@PathVariable Long id, @Valid @RequestBody HealthRecord healthRecord) {
+	        if (!healthRecordService.findById(id).isPresent()) {
 	            log.error("Id " + id + " is not existed");
 	            ResponseEntity.badRequest().build();
 	        }
 
-	        return ResponseEntity.ok(indicatorService.save(indicator));
+	        return ResponseEntity.ok(healthRecordService.save(healthRecord));
 	    }
-
+	   
 	    @DeleteMapping("/{id}")
 	    public ResponseEntity<?> delete (@PathVariable Long id) {
-	        if (!indicatorService.findById(id).isPresent()) {
+	        if (!healthRecordService.findById(id).isPresent()) {
 	            log.error("Id " + id + " is not existed");
 	            ResponseEntity.badRequest().build();
 	        }
 
-	        indicatorService.deleteById(id);
+	        healthRecordService.deleteById(id);
 	        return ResponseEntity.ok().build();
 	    }
 
