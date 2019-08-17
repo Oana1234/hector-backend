@@ -29,7 +29,7 @@ public class HealthRecord {
     @ManyToOne
     @JoinColumn
     @JsonIgnore
-    private IndicatorType indicatorType;
+    private IndicatorType indicatorType; 
 
     @ManyToOne
     @JoinColumn

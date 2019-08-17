@@ -25,11 +25,19 @@ import lombok.extern.slf4j.Slf4j;
 public class HealthRecordAPI {
 	
 	private final HealthRecordService healthRecordService;
+
 	
 	    @GetMapping
 	    public ResponseEntity<List<HealthRecord>>getAll() {
 	        return ResponseEntity.ok(healthRecordService.findAll());
 	    }
+	    
+
+		@GetMapping("/inner")
+	    public ResponseEntity<List<HealthRecordType>>getAllRecodsInnerJoinType() {
+	        return ResponseEntity.ok(healthRecordService.getJoinedRecordsTypes());
+	    }
+	    
 
 	    @PostMapping
 	    public ResponseEntity<HealthRecord> create(@Valid @RequestBody HealthRecord healthRecord){
@@ -48,9 +56,7 @@ public class HealthRecordAPI {
 	        return ResponseEntity.ok(record.get());
 	        
 	    }
-	    
-	    @GetMapping("/id")
-	    
+	    	    
 	    @PutMapping("/{id}")
 	    public ResponseEntity<HealthRecord> update(@PathVariable Long id, @Valid @RequestBody HealthRecord healthRecord) {
 	        if (!healthRecordService.findById(id).isPresent()) {

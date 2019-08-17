@@ -28,5 +28,15 @@ public class HealthRecordService {
 	    public void deleteById(Long id) {
 	    	healthRecordRepository.deleteById(id);
 	    }
+	    
+	    public List<HealthRecordType>getJoinedRecordsTypes() {
+
+			List<HealthRecordType> list = healthRecordRepository.fetchHEalthRecordTypeDataInnerJoin();
+			list.forEach(l -> System.out.println(l));
+			return list;
+	    }
+	    
+	   
+		
 	  
 }

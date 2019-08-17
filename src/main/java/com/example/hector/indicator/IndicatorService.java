@@ -27,5 +27,6 @@ public class IndicatorService {
 
 	    public void deleteById(Long id) {
 	       indicatorRepository.deleteById(id);
+	      
 	    }
 }
