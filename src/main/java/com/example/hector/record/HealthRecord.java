@@ -1,6 +1,7 @@
 package com.example.hector.record;
 
 import java.util.Date;
+import java.util.Optional;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -44,6 +45,7 @@ public class HealthRecord {
     private Float quantitative;
     
     private String notes;
+
 
 
 }

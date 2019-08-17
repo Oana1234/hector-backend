@@ -27,7 +27,6 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<HealthRecord> records;
 
-	 
 	 private String name;
 	 
 	 private String gender;
@@ -39,5 +38,7 @@ public class User {
 	 private Float weight;
 
 	 private String activity;
+	 
+	 
 
 }

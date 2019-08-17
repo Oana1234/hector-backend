@@ -20,6 +20,7 @@ public class IndicatorService {
 	    public Optional<IndicatorType> findById(Long id) {
 	        return indicatorRepository.findById(id);
 	    }
+	    
 
 	    public IndicatorType save(IndicatorType indicator) {
 	        return indicatorRepository.save(indicator);

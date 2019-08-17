@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.hector.indicator.IndicatorService;
+import com.example.hector.indicator.IndicatorType;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,6 +28,7 @@ import lombok.extern.slf4j.Slf4j;
 public class HealthRecordAPI {
 	
 	private final HealthRecordService healthRecordService;
+	private final IndicatorService indicatorService;
 
 	
 	    @GetMapping
@@ -33,16 +37,51 @@ public class HealthRecordAPI {
 	    }
 	    
 
-		@GetMapping("/inner")
+		@GetMapping("/inner/recordtype")
 	    public ResponseEntity<List<HealthRecordType>>getAllRecodsInnerJoinType() {
 	        return ResponseEntity.ok(healthRecordService.getJoinedRecordsTypes());
 	    }
+		
+		@GetMapping("/inner/recordtype/{name}")
+	    public ResponseEntity<List<HealthRecordType>>getRecordsByType(@PathVariable String name){
+			
+	        return ResponseEntity.ok(healthRecordService.getJoinedRecordsTypesByName(name));
+	    }
+		
+
+		@GetMapping("/inner/recorduser")
+	    public ResponseEntity<List<HealthRecordUser>>getAllRecodsInnerJoinUser() {
+	        return ResponseEntity.ok(healthRecordService.getJoinedRecordsUsers());
+	    }
 	    
+		@GetMapping("/inner/recorduser/{id}")
+	    public ResponseEntity<List<HealthRecordUser>>getRecodsByUser(@PathVariable Long id) {
+	        return ResponseEntity.ok(healthRecordService.getJoinedRecordsUsersById(id));
+	    }
+		
+	/*	@GetMapping("/inner/recordusertype/{id}/{name}")
+	    public ResponseEntity<List<HealthRecordTypeUser>>getRecodsByUserAndType(@PathVariable Long id,@PathVariable  String name) {
+	        return ResponseEntity.ok(healthRecordService.getJoinedRecordsByUserAndIndicator(id, name));
+	    }
+		*/
 
 	    @PostMapping
 	    public ResponseEntity<HealthRecord> create(@Valid @RequestBody HealthRecord healthRecord){
 	        return ResponseEntity.ok(healthRecordService.save(healthRecord));
 	    }
+	    
+	/*    @PostMapping("/{indicatorId}/healthRecord")
+	    public ResponseEntity<HealthRecord> createRecordByType(@PathVariable (value = "id") Long id,
+	                                 @Valid @RequestBody HealthRecord healthRecord) {
+	    	
+	    if( indicatorService.findById(id).isPresent()) {
+	    	healthRecord.setIndicatorType(indicatorService.findById(id).get());
+	    }
+	    	
+	    	return ResponseEntity.ok(healthRecordService.save(healthRecord));
+	    	
+	    }
+	    */
 
 	    @GetMapping("/{id}")
 	    public ResponseEntity<HealthRecord> findById(@PathVariable Long id) {
